@@ -11,3 +11,7 @@ document.getElementById("promoForm").addEventListener("submit", function(e) {
   document.getElementById("resultado").textContent =
     `Precio final: $${precioFinal.toFixed(2)}`;
 });
+<<<<<<< HEAD
+=======
+    
+>>>>>>> b3085e5b3df8f2eea80d27d84558a114ad734e21
