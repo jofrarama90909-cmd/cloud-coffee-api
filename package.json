@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Tests ejecutados correctamente\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jofrarama90909-cmd/cloud-coffee-api.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
