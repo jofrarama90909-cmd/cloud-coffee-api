@@ -1,20 +1,102 @@
-<section>
-  <h2>Calcula tu promoción</h2>
-  <form id="promoForm">
-    <label for="precio">Precio del café:</label>
-    <input type="number" id="precio" required>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud-Coffee | Gestión de cafetería</title>
+</head>
+<body>
+  <header>
+    <h1>Cloud-Coffee</h1>
+    <p>Sistema de gestión de cafetería</p>
+  </header>
 
-    <label for="tipoPromo">Selecciona promoción:</label>
-    <select id="tipoPromo">
-      <option value="estudiante">Estudiante (10%)</option>
-      <option value="cumple">Cumpleaños (15%)</option>
-      <option value="ninguna">Sin promoción</option>
-    </select>
+  <main>
+    <section>
+      <h2>Calculadora de promociones</h2>
 
-    <button type="submit">Calcular</button>
-  </form>
+      <form id="promoForm">
+        <label for="precio">Precio del café:</label>
+        <input type="number" id="precio" min="0.01" step="0.01" required>
 
-  <p id="resultado"></p>
-</section>
+        <label for="tipoPromo">Selecciona promoción:</label>
+        <select id="tipoPromo">
+          <option value="estudiante">Estudiante (10%)</option>
+          <option value="cumple">Cumpleaños (15%)</option>
+          <option value="ninguna">Sin promoción</option>
+        </select>
 
-<script src="script.js"></script>
+        <button type="submit">Calcular</button>
+      </form>
+
+      <p id="resultado" aria-live="polite"></p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Gestión de inventario</h2>
+      <p>Registra ingredientes y controla las existencias de la cafetería.</p>
+
+      <form id="inventarioForm">
+        <label for="ingrediente">Nombre del ingrediente:</label>
+        <input
+          type="text"
+          id="ingrediente"
+          maxlength="60"
+          placeholder="Ej. Café en grano"
+          required
+        >
+
+        <label for="cantidad">Cantidad disponible:</label>
+        <input
+          type="number"
+          id="cantidad"
+          min="0"
+          step="0.01"
+          required
+        >
+
+        <label for="unidad">Unidad de medida:</label>
+        <select id="unidad" required>
+          <option value="kg">Kilogramos</option>
+          <option value="g">Gramos</option>
+          <option value="L">Litros</option>
+          <option value="ml">Mililitros</option>
+          <option value="piezas">Piezas</option>
+        </select>
+
+        <label for="minimo">Nivel mínimo de existencias:</label>
+        <input
+          type="number"
+          id="minimo"
+          min="0"
+          step="0.01"
+          required
+        >
+
+        <button type="submit">Registrar ingrediente</button>
+      </form>
+
+      <p id="mensajeInventario" aria-live="polite"></p>
+
+      <h3>Ingredientes registrados</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Ingrediente</th>
+            <th>Existencias</th>
+            <th>Mínimo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="listaInventario"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
