@@ -1,237 +1,307 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Coffee | Gestión de cafetería</title>
 
-```
-<title>Cloud Coffee</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5efe6;
+            color: #3e2723;
+        }
 
-    body {
-        font-family: Arial, sans-serif;
-        background: #f5efe6;
-        color: #3e2723;
-    }
+        header {
+            background: #4e342e;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
 
-    header {
-        background: #4e342e;
-        color: white;
-        padding: 25px;
-        text-align: center;
-    }
+        header h1 {
+            margin-bottom: 8px;
+        }
 
-    header h1 {
-        margin-bottom: 8px;
-    }
+        nav {
+            background: #6d4c41;
+            padding: 12px;
+            text-align: center;
+        }
 
-    nav {
-        background: #6d4c41;
-        padding: 12px;
-        text-align: center;
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
 
-    nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 15px;
-        font-weight: bold;
-    }
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: #d7ccc8;
+        }
 
-    .hero {
-        text-align: center;
-        padding: 60px 20px;
-        background: #d7ccc8;
-    }
+        .hero h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
 
-    .hero h2 {
-        font-size: 35px;
-        margin-bottom: 15px;
-    }
+        .menu, .promociones, .inventario {
+            padding: 40px 20px;
+            text-align: center;
+        }
 
-    .hero p {
-        font-size: 18px;
-    }
+        .menu h2, .promociones h2, .inventario h2 {
+            margin-bottom: 25px;
+        }
 
-    .menu {
-        padding: 40px 20px;
-        text-align: center;
-    }
+        .productos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-    .menu h2 {
-        margin-bottom: 30px;
-    }
+        .producto {
+            background: white;
+            padding: 25px;
+            width: 220px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
 
-    .productos {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
+        .producto h3, .producto p {
+            margin-bottom: 10px;
+        }
 
-    .producto {
-        background: white;
-        padding: 25px;
-        width: 220px;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    .producto h3 {
-        margin-bottom: 10px;
-    }
-
-    .producto p {
-        margin-bottom: 10px;
-    }
-
-    .precio {
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    footer {
-        background: #4e342e;
-        color: white;
-        text-align: center;
-        padding: 20px;
-        margin-top: 30px;
-    }
+        .precio {
+            font-weight: bold;
+            font-size: 20px;
+        }
 
         .promociones {
-        padding: 40px 20px;
-        text-align: center;
-        background: #efebe9;
+            background: #efebe9;
         }
 
-        .calculadora {
-        max-width: 400px;
-        margin: 25px auto;
-        padding: 25px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        .calculadora, .formulario-inventario {
+            max-width: 450px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
 
-        .calculadora label {
-        display: block;
-        margin-top: 15px;
-        margin-bottom: 5px;
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-align: left;
         }
 
-        .calculadora input,
-        .calculadora select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
         }
 
-        .calculadora button {
-        padding: 10px 20px;
-        background: #6d4c41;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        button {
+            padding: 10px 20px;
+            background: #6d4c41;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .calculadora button:hover {
-        background: #4e342e;
+        button:hover {
+            background: #4e342e;
         }
 
-        #resultado {
-        margin-top: 20px;
-        font-weight: bold;
+        #resultado, #mensajeInventario {
+            margin-top: 20px;
+            font-weight: bold;
         }
-</style>
-```
 
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: 25px auto;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        th {
+            background: #6d4c41;
+            color: white;
+        }
+
+        .stock-bajo {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #4e342e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 
 <body>
 
-```
-<header>
-    <h1>☕ Cloud Coffee</h1>
-    <p>Tu café favorito, siempre cerca de ti</p>
-</header>
+    <header>
+        <h1>☕ Cloud Coffee</h1>
+        <p>Tu café favorito, siempre cerca de ti</p>
+    </header>
 
-<nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#menu">Menú</a>
-    <a href="#contacto">Contacto</a>
-</nav>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#menu">Menú</a>
+        <a href="#promociones">Promociones</a>
+        <a href="#inventario">Inventario</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
 
-<section class="hero" id="inicio">
-    <h2>Bienvenido a Cloud Coffee</h2>
-    <p>
-        Disfruta café recién preparado, bebidas frías y deliciosos postres.
-    </p>
-</section>
+    <section class="hero" id="inicio">
+        <h2>Bienvenido a Cloud Coffee</h2>
+        <p>Disfruta café recién preparado, bebidas frías y deliciosos postres.</p>
+    </section>
 
-<section class="menu" id="menu">
+    <section class="menu" id="menu">
+        <h2>Nuestro menú</h2>
 
-    <h2>Nuestro menú</h2>
+        <div class="productos">
+            <div class="producto">
+                <h3>☕ Capuchino</h3>
+                <p>Café espresso con leche vaporizada.</p>
+                <p class="precio">$55</p>
+            </div>
 
-    <div class="productos">
+            <div class="producto">
+                <h3>☕ Americano</h3>
+                <p>Espresso combinado con agua caliente.</p>
+                <p class="precio">$40</p>
+            </div>
 
-        <div class="producto">
-            <h3>☕ Capuchino</h3>
-            <p>Café espresso con leche vaporizada.</p>
-            <p class="precio">$55</p>
+            <div class="producto">
+                <h3>🍰 Pastel de chocolate</h3>
+                <p>Rebanada de pastel de chocolate.</p>
+                <p class="precio">$60</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="promociones" id="promociones">
+        <h2>Promociones</h2>
+        <p>Calcula tu descuento en Cloud Coffee.</p>
+
+        <div class="calculadora">
+            <form id="promoForm">
+                <label for="precio">Precio de la compra:</label>
+                <input type="number" id="precio" min="0.01" step="0.01" required>
+
+                <label for="tipoPromo">Selecciona una promoción:</label>
+                <select id="tipoPromo">
+                    <option value="estudiante">Estudiante (10%)</option>
+                    <option value="cumple">Cumpleaños (15%)</option>
+                    <option value="ninguna">Sin promoción</option>
+                </select>
+
+                <button type="submit">Calcular descuento</button>
+            </form>
+
+            <p id="resultado" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <section class="inventario" id="inventario">
+        <h2>Gestión de inventario</h2>
+        <p>Registra ingredientes y controla las existencias de la cafetería.</p>
+
+        <div class="formulario-inventario">
+            <form id="inventarioForm">
+
+                <label for="ingrediente">Nombre del ingrediente:</label>
+                <input
+                    type="text"
+                    id="ingrediente"
+                    maxlength="60"
+                    placeholder="Ej. Café en grano"
+                    required
+                >
+
+                <label for="cantidad">Cantidad disponible:</label>
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+                <label for="unidad">Unidad de medida:</label>
+                <select id="unidad" required>
+                    <option value="kg">Kilogramos</option>
+                    <option value="g">Gramos</option>
+                    <option value="L">Litros</option>
+                    <option value="ml">Mililitros</option>
+                    <option value="piezas">Piezas</option>
+                </select>
+
+                <label for="minimo">Nivel mínimo de existencias:</label>
+                <input
+                    type="number"
+                    id="minimo"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+                <button type="submit">Registrar ingrediente</button>
+            </form>
+
+            <p id="mensajeInventario" aria-live="polite"></p>
         </div>
 
-        <div class="producto">
-            <h3>☕ Americano</h3>
-            <p>Espresso combinado con agua caliente.</p>
-            <p class="precio">$40</p>
-        </div>
+        <h3>Ingredientes registrados</h3>
 
-        <div class="producto">
-            <h3>🍰 Pastel de chocolate</h3>
-            <p>Rebanada de pastel de chocolate.</p>
-            <p class="precio">$60</p>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ingrediente</th>
+                    <th>Existencias</th>
+                    <th>Mínimo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="listaInventario"></tbody>
+        </table>
+    </section>
 
-    </div>
+    <footer id="contacto">
+        <p>Cloud Coffee © 2026</p>
+        <p>Av. Vallarta #500 | Guadalajara, Jalisco</p>
+    </footer>
 
-</section>
+    <script src="script.js"></script>
 
-<footer id="contacto">
-    <p>Cloud Coffee © 2026</p>
-    <p>Av. Vallarta #500 | Guadalajara, Jalisco</p>
-</footer>
-```
-<section class="promociones" id="promociones">
-    <h2>Promociones</h2>
-
-    <p>Calcula tu descuento en Cloud Coffee</p>
-
-    <div class="calculadora">
-        <label for="precio">Precio de la compra:</label>
-        <input type="number" id="precio" placeholder="Ej. 100">
-
-        <label for="promocion">Selecciona una promoción:</label>
-        <select id="promocion">
-            <option value="estudiante">Estudiante - 10%</option>
-            <option value="cumpleanos">Cumpleaños - 15%</option>
-        </select>
-
-        <button onclick="calcularPromocion()">
-            Calcular descuento
-        </button>
-
-        <p id="resultado"></p>
-    </div>
-</section>
-
-<script src="script.js"></script>
 </body>
 </html>
